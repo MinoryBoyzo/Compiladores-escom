@@ -1,12 +1,13 @@
+package scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+//CLASE SCANNER MAIN
 public class Scanner {
 
-
+    //VARIABLES DE ENTRADA
     private final String source;
 
     private final List<Token> tokens = new ArrayList<>();
@@ -92,7 +93,6 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.RESTA, "-"));
                                 }
                             }
-                            //i++;
                             break;
                         case '+':
                             if (car == '+') {
@@ -104,7 +104,6 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.SUMA, "+"));
                                 }
                             }
-                            //i++;
                             break;
                         case '*':
                             tokens.add(new Token(TipoToken.MULTIPLICACION, "*"));
@@ -161,7 +160,6 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.MAYORQUE, ">",null));
                                 }
                             }
-
                             break;
                         case '!':
                             if (car == '!') {
@@ -173,7 +171,6 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.NEGACIONLOGICA, "-"));
                                 }
                             }
-
                             break;
 
                         //VARIANTES A OTROS ESTADOS
@@ -289,7 +286,7 @@ public class Scanner {
                         }
                     }
                     break;
-                //continuacion numeros
+                    //continuacion numeros
                 case 6:
                     if(Character.isDigit(car)){
                         estado = 8;

@@ -1,3 +1,4 @@
+package scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,9 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class Principal {
-
+public class Interprete {
     static boolean existenErrores = false;
+
+    public static TablaSimbolos tablaSimbolos;
 
     public static void main(String[] args) throws IOException {
         if(args.length > 1) {
@@ -21,7 +23,6 @@ public class Principal {
         } else{
             ejecutarPrompt();
         }
-        ejecutarPrompt();
     }
 
     private static void ejecutarArchivo(String path) throws IOException {
@@ -46,27 +47,28 @@ public class Principal {
     }
 
     private static void ejecutar(String source){
+        //LEXICO
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
+        //SINTACTICO
+        Desendente Program = new Desendente(tokens);
+        Program.Program();
 
-        /*for(Token token : tokens){
-            System.out.println(token);
-        }*/
+        //SEMANTICO
 
-        // Para este ejemplo no vamos a utilizar un parser
-        /*Parser parser = new Parser(tokens);
-        parser.parse();*/
-
-        GeneradorPostfija gpf = new GeneradorPostfija(tokens);
-        List<Token> postfija = gpf.convertir();
-
-        /*for(Token token : postfija){
-            System.out.println(token);
-        }*/
+        GeneradorPosfija pfija = new GeneradorPosfija(tokens);
+        List<Token> postfija = pfija.convertir();
 
         GeneradorAST gast = new GeneradorAST(postfija);
         Arbol programa = gast.generarAST();
-        programa.recorrer();
+        tablaSimbolos = new TablaSimbolos();
+
+        if (programa == null){
+            System.out.println("No hay arbol");
+        } else {
+            programa.recorrer(tablaSimbolos); //ejecuta el metodo recorrer
+        }
+
     }
 
     /*

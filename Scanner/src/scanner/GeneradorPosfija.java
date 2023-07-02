@@ -1,14 +1,15 @@
+package scanner;
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-public class GeneradorPostfija {
+public class GeneradorPosfija {
 
     private final List<Token> infija;
     private final Stack<Token> pila;
     private final List<Token> postfija;
 
-    public GeneradorPostfija(List<Token> infija) {
+    public GeneradorPosfija(List<Token> infija) {
         this.infija = infija;
         this.pila = new Stack<>();
         this.postfija = new ArrayList<>();
@@ -39,22 +40,19 @@ public class GeneradorPostfija {
             else if(t.esOperando()){
                 postfija.add(t);
             }
-            else if(t.tipo == TipoToken.LPAREN){
+            else if(t.tipo == TipoToken.PARENTESISABRE){
                 pila.push(t);
             }
-            else if(t.tipo == TipoToken.RPAREN){
-                while(!pila.isEmpty() && pila.peek().tipo != TipoToken.LPAREN){
+            else if(t.tipo == TipoToken.PARENTESISCIERRA){
+                while(!pila.isEmpty() && pila.peek().tipo != TipoToken.PARENTESISABRE){
                     Token temp = pila.pop();
                     postfija.add(temp);
                 }
-                if(pila.peek().tipo == TipoToken.LPAREN){
+                if(pila.peek().tipo == TipoToken.PARENTESISABRE){
                     pila.pop();
                 }
-
-                // Esta sección de aquí es para manejar el ")" que cierra la
-                // condición de la estructura de control
-                if(estructuraDeControl && infija.get(i + 1).tipo == TipoToken.LBRACE){
-                    postfija.add(new Token(TipoToken.SEMICOLON, ";", null));
+                if(estructuraDeControl){
+                    postfija.add(new Token(TipoToken.PUNTOYCOMA, ";", null));
                 }
             }
             else if(t.esOperador()){
@@ -64,21 +62,20 @@ public class GeneradorPostfija {
                 }
                 pila.push(t);
             }
-            else if(t.tipo == TipoToken.SEMICOLON){
-                while(!pila.isEmpty() && pila.peek().tipo != TipoToken.LBRACE){
+            else if(t.tipo == TipoToken.PUNTOYCOMA){
+                while(!pila.isEmpty() && pila.peek().tipo != TipoToken.LLAVEABRE){
                     Token temp = pila.pop();
                     postfija.add(temp);
                 }
                 postfija.add(t);
             }
-            else if(t.tipo == TipoToken.LBRACE){
+            else if(t.tipo == TipoToken.LLAVEABRE){
                 // Se mete a la pila, tal como el parentesis. Este paso
                 // pudiera omitirse, sólo hay que tener cuidado en el manejo
                 // del "}".
                 pila.push(t);
             }
-            else if(t.tipo == TipoToken.RBRACE && estructuraDeControl){
-
+            else if(t.tipo == TipoToken.LLAVECIERRA && estructuraDeControl){
                 // Primero verificar si hay un else:
                 if(infija.get(i + 1).tipo == TipoToken.ELSE){
                     // Sacar el "{" de la pila
@@ -90,19 +87,10 @@ public class GeneradorPostfija {
                     // El cual servirá para indicar que se finaliza la estructura
                     // de control.
                     pila.pop();
-                    postfija.add(new Token(TipoToken.SEMICOLON, ";", null));
+                    postfija.add(new Token(TipoToken.PUNTOYCOMA, ";", null));
 
                     // Se extrae de la pila de estrucuras de control, el elemento en el tope
-                    Token aux = pilaEstructurasDeControl.pop();
-
-                    /*
-                        Si se da este caso, es necesario extraer el IF de la pila
-                        pilaEstructurasDeControl, y agregar los ";" correspondientes
-                     */
-                    if(aux.tipo == TipoToken.ELSE){
-                        pilaEstructurasDeControl.pop();
-                        postfija.add(new Token(TipoToken.SEMICOLON, ";", null));
-                    }
+                    pilaEstructurasDeControl.pop();
                     if(pilaEstructurasDeControl.isEmpty()){
                         estructuraDeControl = false;
                     }
@@ -118,7 +106,7 @@ public class GeneradorPostfija {
 
         while(!pilaEstructurasDeControl.isEmpty()){
             pilaEstructurasDeControl.pop();
-            postfija.add(new Token(TipoToken.SEMICOLON, ";", null));
+            postfija.add(new Token(TipoToken.PUNTOYCOMA, ";", null));
         }
 
         return postfija;

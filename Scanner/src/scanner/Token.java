@@ -1,3 +1,4 @@
+package scanner;
 
 public class Token {
 
@@ -17,11 +18,15 @@ public class Token {
         this.literal = literal;
     }
 
+    @Override
     public String toString() {
         return tipo + " " + lexema + " " + (literal == null ? "" : literal.toString());
     }
 
 
+
+
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Token)) {
             return false;
@@ -58,7 +63,7 @@ public class Token {
             case MENORQUE:
             case MENORIGUALQUE:
             case DIFERENTEDE:
-                //BOOLEANOS
+            //BOOLEANOS
             case Y:
             case O:
                 return true;
@@ -146,4 +151,3 @@ public class Token {
     }
 
 }
-
