@@ -1,12 +1,9 @@
 package scanner;
-
-//LIBRERIAS
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//CLASE SCANNER MAIN
 public class Scanner {
 
     //VARIABLES DE ENTRADA
@@ -95,7 +92,7 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.RESTA, "-"));
                                 }
                             }
-                            //i++;
+
                             break;
                         case '+':
                             if (car == '+') {
@@ -107,7 +104,7 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.SUMA, "+"));
                                 }
                             }
-                            //i++;
+
                             break;
                         case '*':
                             tokens.add(new Token(TipoToken.MULTIPLICACION, "*"));
@@ -116,7 +113,6 @@ public class Scanner {
                             if (car == '/') {
                                 // Verificar si hay otro '/' consecutivo
                                 if (i + 1 < source.length() && source.charAt(i + 1) == '/') {
-                                    //tokens.add(new Token(TipoToken.DIVISION, "/", inicioLexema + 1));
                                     estado = 4; // Mover al caso 5 para reconocer comentarios
                                     i++; // Avanzar al siguiente carácter
                                 } else if(i + 1 < source.length() && source.charAt(i + 1) == '*'){
@@ -141,7 +137,6 @@ public class Scanner {
                                 }
                             }
 
-                            //tokens.add(new Token(TipoToken.IGUAL,"=",i+1));
                             break;
                         case '<':
                             if (car == '<') {
@@ -154,7 +149,6 @@ public class Scanner {
                                 }
                             }
 
-                            //tokens.add(new Token(TipoToken.MENORQUE,"<",i+1));
                             break;
                         case '>':
                             if (car == '>') {
@@ -166,8 +160,7 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.MAYORQUE, ">",null));
                                 }
                             }
-                            //i++;
-                            //tokens.add(new Token(TipoToken.MAYORQUE,">",i+1));
+
                             break;
                         case '!':
                             if (car == '!') {
@@ -179,8 +172,7 @@ public class Scanner {
                                     tokens.add(new Token(TipoToken.NEGACIONLOGICA, "-"));
                                 }
                             }
-                            //i++;
-                            //tokens.add(new Token(TipoToken.NEGACIONLOGICA,"!",i+1));
+
                             break;
 
                         //VARIANTES A OTROS ESTADOS
@@ -362,33 +354,3 @@ public class Scanner {
         return tokens;
     }
 }
-
-/*
-Signos o símbolos del lenguaje:
-(
-)
-{
-}
-,
-.
-;
--
-+
-*
-/
-!
-!=
-=
-==
-<
-<=
->
->=
-// -> comentarios (no se genera token)
-/* ... * / -> comentarios (no se genera token)
-Identificador,
-Cadena
-Numero
-Cada palabra reservada tiene su nombre de token
-
- */

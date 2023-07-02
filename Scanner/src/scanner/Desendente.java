@@ -1,14 +1,8 @@
 package scanner;
-
 import java.util.List;
 
-/**
- *
- * @author Jair
- */
 public class Desendente {
     private final List<Token> tokens;
-
     private final Token identificador = new Token(TipoToken.IDENTIFICADOR, "");
     private final Token coma = new Token(TipoToken.COMA, ",");
     private final Token punto = new Token(TipoToken.PUNTO, ".");
@@ -18,7 +12,6 @@ public class Desendente {
     private final Token fun = new Token(TipoToken.FUN, "fun");
     private final Token puntoycoma = new Token(TipoToken.PUNTOYCOMA, ";");
     private final Token si = new Token(TipoToken.IF, "if");
-
     private final Token igual = new Token(TipoToken.IGUAL, "=");
     private final Token para  = new Token(TipoToken.FOR, "for");
     private final Token de_otro_modo = new Token(TipoToken.ELSE, "else");
@@ -37,9 +30,6 @@ public class Desendente {
     private final Token division = new Token(TipoToken.DIVISION, "/");
     private final Token multiplicacion = new Token(TipoToken.MULTIPLICACION, "*");
     private final Token neg_logica = new Token(TipoToken.NEGACIONLOGICA, "!");
-
-
-
     private final Token verdadero = new Token(TipoToken.TRUE, "true");
     private final Token falso = new Token(TipoToken.FALSE, "false");
     private final Token nulo = new Token(TipoToken.NULL, "null");
@@ -58,7 +48,6 @@ public class Desendente {
     private boolean hayErrores = false; //VAR. de errores
 
     private Token preanalisis; //ANALISIS DE TOKENS
-    //private Token aux; //****************************************************
 
     public Desendente(List<Token> tokens){
         this.tokens = tokens;
@@ -108,12 +97,6 @@ public class Desendente {
         } else { //EPSILON
 
         }
-        /*
-        if(!preanalisis.equals(finCadena)){
-            System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
-        }else if(!hayErrores){
-            System.out.println("Consulta válida");
-        }*/
     }
 
     void Class_decl(){
@@ -239,8 +222,6 @@ public class Desendente {
             hayErrores = true;
             System.out.println("Error. Se esperaba ';'.");
         }
-
-        //************************
     }
 
     void For_stmt(){
@@ -776,7 +757,4 @@ public class Desendente {
         }
 
     }
-
-    //AQUI TERMINA TODA LA GRAMATICA DEL PROYECTO
-
 }

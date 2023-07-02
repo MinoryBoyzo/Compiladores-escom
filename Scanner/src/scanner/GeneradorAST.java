@@ -1,14 +1,10 @@
 package scanner;
-
-
 import java.util.List;
 import java.util.Stack;
 
 public class GeneradorAST {
-
     private final List<Token> postfija;
     private final Stack<Nodo> pila;
-
     public GeneradorAST(List<Token> postfija){
         this.postfija = postfija;
         this.pila = new Stack<>(); //pila auxiliar
@@ -29,10 +25,8 @@ public class GeneradorAST {
             //PALABRAS RESERVADAS "VAR, IF, IMPRIMIR, WHILE, FOR"
             if(t.esPalabraReservada()){
                 Nodo n = new Nodo(t); //crea nodo
-
                 padre = pilaPadres.peek(); //raiz
                 padre.insertarSiguienteHijo(n); //alguna estructura de control
-
                 pilaPadres.push(n); //se incluye en la pila la estructura de control
                 padre = n; //ahora esa estructura es un padre
 

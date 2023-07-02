@@ -1,5 +1,4 @@
 package scanner;
-
 public class SolverAritmetico {
 
     private final Nodo nodo;

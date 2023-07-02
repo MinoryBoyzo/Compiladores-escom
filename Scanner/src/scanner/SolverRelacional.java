@@ -1,7 +1,5 @@
 package scanner;
-
 public class SolverRelacional {
-
     private final Nodo nodo;
     private final TablaSimbolos tablaSimbolos;
     public SolverRelacional(Nodo nodo, TablaSimbolos tablaSimbolos) {
@@ -92,8 +90,6 @@ public class SolverRelacional {
         // < <= > >= == != usualmente son los que estaran aqui
         Nodo primCon = n.getHijos().get(0);
         Nodo segCon = n.getHijos().get(1);
-        //System.out.println(primCon.getValue().lexema);
-        //System.out.println(segCon.getValue().lexema);
         //OPERANDOS DE LA PRIMERA CONDICION
         Nodo izq1 = primCon.getHijos().get(0);
         Nodo der1 = primCon.getHijos().get(1);

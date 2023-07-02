@@ -1,6 +1,4 @@
 package scanner;
-
-//CLASE PARA ANALIZADOR SEMANTICO
 public class Token {
 
     final TipoToken tipo;
@@ -23,28 +21,6 @@ public class Token {
     public String toString() {
         return tipo + " " + lexema + " " + (literal == null ? "" : literal.toString());
     }
-
-
-
-    //METODOS GET NO UTILIZADOS
-    /*
-    public TipoToken getTipo() {
-        return tipo;
-    }
-
-    public String getLexema() {
-        return lexema;
-    }
-
-    public Object getLiteral() {
-        return literal;
-    }
-
-    public int getPosicion() {
-        return posicion;
-    }
-
-     */
 
     @Override
     public boolean equals(Object o) {
@@ -171,43 +147,3 @@ public class Token {
     }
 
 }
-
-//CLASE ANTERIOR PARA ANALIZADOR LEXICO Y SINTACTICO
-
-/*
-public class Token {
-
-    final TipoToken tipo;
-    final String lexema;
-    final int posicion;
-
-    public Token(TipoToken tipo, String lexema,  int posicion) {
-        this.tipo = tipo;
-        this.lexema = lexema;
-        this.posicion = posicion;
-    }
-
-    public Token(TipoToken tipo, String lexema) {
-        this.tipo = tipo;
-        this.lexema = lexema;
-        this.posicion = 0;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Token)) {
-            return false;
-        }
-
-        if(this.tipo == ((Token)o).tipo){
-            return true;
-        }
-
-        return false;
-    }
-
-    public String toString(){
-        return tipo + " " + lexema + " ";
-    }
-}*/

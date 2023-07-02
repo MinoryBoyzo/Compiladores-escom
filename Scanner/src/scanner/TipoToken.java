@@ -16,10 +16,6 @@ public enum TipoToken {
     CADENA,     //CADENA DE CARACTERES ""
     NUMERO,    //NUMEROS 0,1..9
 
-
-    NUMERONEG, //temporal
-
-
     //DEL LENGUAJE
     VAR,IMPRIMIR,FUN,
 

@@ -1,11 +1,9 @@
 package scanner;
-
 import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 public class GeneradorPosfija {
-
     private final List<Token> infija;
     private final Stack<Token> pila;
     private final List<Token> postfija;
@@ -24,8 +22,6 @@ public class GeneradorPosfija {
             Token t = infija.get(i);
 
             if(t.tipo == TipoToken.EOF){
-                //*****************************
-                //postfija.add(t);
                 break;
             }
 

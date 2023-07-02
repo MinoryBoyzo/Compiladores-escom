@@ -1,5 +1,4 @@
 package scanner;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -51,11 +50,7 @@ public class Interprete {
         //LEXICO
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
-        /*
-        for(Token token : tokens){
-            System.out.println(token);
-        }
-        */
+
         //SINTACTICO
         Desendente Program = new Desendente(tokens);
         Program.Program();
@@ -64,11 +59,7 @@ public class Interprete {
 
         GeneradorPosfija pfija = new GeneradorPosfija(tokens);
         List<Token> postfija = pfija.convertir();
-/*
-        for (Token token : postfija){
-            System.out.println(token);
-        }
-*/
+
         GeneradorAST gast = new GeneradorAST(postfija);
         Arbol programa = gast.generarAST();
         tablaSimbolos = new TablaSimbolos();
@@ -81,11 +72,7 @@ public class Interprete {
 
     }
 
-    /*
-    El método error se puede usar desde las distintas clases
-    para reportar los errores:
-    Interprete.error(....);
-     */
+
     static void error(int linea, String mensaje){
         reportar(linea, "", mensaje);
     }
