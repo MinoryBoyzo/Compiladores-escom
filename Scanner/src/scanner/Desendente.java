@@ -1,5 +1,11 @@
 package scanner;
+
 import java.util.List;
+
+/**
+ *
+ * @author Jair
+ */
 public class Desendente {
     private final List<Token> tokens;
 
@@ -32,6 +38,8 @@ public class Desendente {
     private final Token multiplicacion = new Token(TipoToken.MULTIPLICACION, "*");
     private final Token neg_logica = new Token(TipoToken.NEGACIONLOGICA, "!");
 
+
+
     private final Token verdadero = new Token(TipoToken.TRUE, "true");
     private final Token falso = new Token(TipoToken.FALSE, "false");
     private final Token nulo = new Token(TipoToken.NULL, "null");
@@ -50,7 +58,7 @@ public class Desendente {
     private boolean hayErrores = false; //VAR. de errores
 
     private Token preanalisis; //ANALISIS DE TOKENS
-
+    //private Token aux; //****************************************************
 
     public Desendente(List<Token> tokens){
         this.tokens = tokens;
@@ -100,6 +108,12 @@ public class Desendente {
         } else { //EPSILON
 
         }
+        /*
+        if(!preanalisis.equals(finCadena)){
+            System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
+        }else if(!hayErrores){
+            System.out.println("Consulta válida");
+        }*/
     }
 
     void Class_decl(){
@@ -226,6 +240,7 @@ public class Desendente {
             System.out.println("Error. Se esperaba ';'.");
         }
 
+        //************************
     }
 
     void For_stmt(){
@@ -315,6 +330,7 @@ public class Desendente {
         } else { //EPSILON
 
         }
+        //**
     }
 
     void Print_stmt(){
@@ -760,4 +776,7 @@ public class Desendente {
         }
 
     }
+
+    //AQUI TERMINA TODA LA GRAMATICA DEL PROYECTO
+
 }

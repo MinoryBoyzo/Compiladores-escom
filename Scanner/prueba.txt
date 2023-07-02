@@ -1,5 +1,6 @@
-// Prueba 1:
-var nombre = "Gabriel";
-var apellido = "Rodriguez";
+var radio = 5;
+var pi = 3.1416;
+var area = pi*radio *radio;
 
-print nombre + " " + apellido;
+print "El area es: ";
+print area;

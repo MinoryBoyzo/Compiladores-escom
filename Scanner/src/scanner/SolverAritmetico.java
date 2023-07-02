@@ -1,4 +1,5 @@
 package scanner;
+
 public class SolverAritmetico {
 
     private final Nodo nodo;
@@ -13,6 +14,7 @@ public class SolverAritmetico {
         return resolver(nodo); //va a retornar un objeto
     }
     private Object resolver(Nodo n){
+        //boolean existe = false;
         // No tiene hijos, es un operando
         if(n.getHijos() == null){
             if(n.getValue().tipo == TipoToken.NUMERO || n.getValue().tipo == TipoToken.CADENA || n.getValue().tipo == TipoToken.TRUE || n.getValue().tipo == TipoToken.FALSE ){

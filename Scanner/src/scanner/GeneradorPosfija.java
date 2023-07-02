@@ -1,4 +1,5 @@
 package scanner;
+
 import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class GeneradorPosfija {
             Token t = infija.get(i);
 
             if(t.tipo == TipoToken.EOF){
+                //*****************************
+                //postfija.add(t);
                 break;
             }
 

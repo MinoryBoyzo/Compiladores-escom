@@ -1,6 +1,8 @@
 package scanner;
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class Nodo {
     private final Token value;
     private List<Nodo> hijos;

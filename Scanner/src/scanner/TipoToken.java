@@ -1,4 +1,5 @@
 package scanner;
+
 public enum TipoToken {
     // Crear un tipoToken por palabra reservada
     // Palabras clave:
@@ -14,6 +15,9 @@ public enum TipoToken {
     IDENTIFICADOR, //PARA NOMBRES DE FUNCIONES
     CADENA,     //CADENA DE CARACTERES ""
     NUMERO,    //NUMEROS 0,1..9
+
+
+    NUMERONEG, //temporal
 
 
     //DEL LENGUAJE
