@@ -1,4 +1,5 @@
 package scanner;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,18 +10,16 @@ import java.util.List;
 
 public class Interprete {
     static boolean existenErrores = false;
-
     public static TablaSimbolos tablaSimbolos;
 
     public static void main(String[] args) throws IOException {
-        if(args.length > 1) {
+        if (args.length > 1) {
             System.out.println("Uso correcto: interprete [script]");
-
-            // Convención defininida en el archivo "system.h" de UNIX
+            // Convención definida en el archivo "system.h" de UNIX
             System.exit(64);
-        } else if(args.length == 1){
+        } else if (args.length == 1) {
             ejecutarArchivo(args[0]);
-        } else{
+        } else {
             ejecutarPrompt();
         }
     }
@@ -30,58 +29,56 @@ public class Interprete {
         ejecutar(new String(bytes, Charset.defaultCharset()));
 
         // Se indica que existe un error
-        if(existenErrores) System.exit(65);
+        if (existenErrores)
+            System.exit(65);
     }
 
-    private static void ejecutarPrompt() throws IOException{
+    private static void ejecutarPrompt() throws IOException {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
 
-        for(;;){
+        for (;;) {
             System.out.print(">>> ");
             String linea = reader.readLine();
-            if(linea == null) break; // Presionar Ctrl + D
+            if (linea == null)
+                break; // Presionar Ctrl + D
             ejecutar(linea);
             existenErrores = false;
         }
     }
 
-    private static void ejecutar(String source){
-        //LEXICO
+    private static void ejecutar(String source) {
+        // LEXICO
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 
-        //SINTACTICO
+        // SINTACTICO
         Desendente Program = new Desendente(tokens);
         Program.Program();
 
-        //SEMANTICO
+        // SEMANTICO
+        tablaSimbolos = new TablaSimbolos();
 
         GeneradorPosfija pfija = new GeneradorPosfija(tokens);
         List<Token> postfija = pfija.convertir();
 
         GeneradorAST gast = new GeneradorAST(postfija);
         Arbol programa = gast.generarAST();
-        tablaSimbolos = new TablaSimbolos();
 
-        if (programa == null){
-            System.out.println("No hay arbol");
+        if (programa == null) {
+            System.out.println("No hay árbol");
         } else {
-            programa.recorrer(tablaSimbolos); //ejecuta el metodo recorrer
+            programa.recorrer(tablaSimbolos); // ejecuta el método recorrer
         }
-
     }
 
-
-    static void error(int linea, String mensaje){
+    static void error(int linea, String mensaje) {
         reportar(linea, "", mensaje);
     }
 
-    private static void reportar(int linea, String donde, String mensaje){
-        System.err.println(
-                "[linea " + linea + "] Error " + donde + ": " + mensaje
-        );
+    private static void reportar(int linea, String donde, String mensaje) {
+        System.err.println("[linea " + linea + "] Error " + donde + ": " + mensaje);
         existenErrores = true;
     }
-
 }
+
